@@ -95,3 +95,4 @@ C:\Users\user\source\repos\CPMS\CPMS\bin\Debug\net8.0\Microsoft.IdentityModel.Pr
 C:\Users\user\source\repos\CPMS\CPMS\bin\Debug\net8.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
 C:\Users\user\source\repos\CPMS\CPMS\bin\Debug\net8.0\Microsoft.IdentityModel.Tokens.dll
 C:\Users\user\source\repos\CPMS\CPMS\bin\Debug\net8.0\System.IdentityModel.Tokens.Jwt.dll
+C:\Users\user\source\repos\CPMS\CPMS\obj\Debug\net8.0\CPMS.sourcelink.json
