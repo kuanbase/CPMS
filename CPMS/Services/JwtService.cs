@@ -32,13 +32,26 @@ public class JwtService
         var role = _rolesCollection.Find(r => r.Id == user.RoleId).FirstOrDefault();
         var roleName = role?.Name ?? "Guest";
 
-        // 3. 查找权限
-        //var permissions = _permissionsCollection
-        //    .Find(p => role!.PermissionIds!.Contains(p.Id!))
-        //    .Project(p => p.Name)
-        //    .ToList();
+        // 3. 生成 JWT 令牌
+        return GenerateToken(user, roleName);
+    }
 
-        // 4. 生成 JWT 令牌
+    public string? AdminAuthenticate(string email, string password)
+    {
+        // 1. 查找用户
+        var user = _usersCollection.Find(u => u.Email == email && u.Password == password).FirstOrDefault();
+        if (user == null) return null; // 用户不存在或密码错误
+
+        // 2. 查找角色
+        var role = _rolesCollection.Find(r => r.Id == user.RoleId).FirstOrDefault();
+        var roleName = role?.Name ?? "Guest";
+
+        if (roleName != "ADMINISTRATOR")
+        {
+            return "";
+        }
+
+        // 3. 生成 JWT 令牌
         return GenerateToken(user, roleName);
     }
 

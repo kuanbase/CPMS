@@ -204,13 +204,6 @@ namespace CPMS.Data
             role.InsertOne(UserManager);
 
             _NameToId["User Manager"] = UserManager.Id!;
-
-            var Employee = new Roles
-            {
-                Name = "Employee",
-            };
-
-            role.InsertOne(Employee);
         }
 
         protected void InitializeUserData()
@@ -233,6 +226,51 @@ namespace CPMS.Data
                 user.InsertOne(admin);
 
                 _NameToId["ADMIN"] = admin.Id!;
+
+                var defaultDealer = new Users
+                {
+                    Name = "Default Dealer",
+                    Number = Users.GetUNumber(),
+                    Password = "Dealer@12345",
+                    Email = "dealer@city.com",
+                    RoleId = _NameToId["Dealer"],
+                    CreatedDate = DateTime.Now,
+                    LastModifiedDate = DateTime.Now,
+                };
+
+                user.InsertOne(defaultDealer);
+
+                _NameToId["DefaultDealer"] = defaultDealer.Id!;
+
+                var defaultUserManager = new Users
+                {
+                    Name = "Default User Manager",
+                    Number = Users.GetUNumber(),
+                    Email = "user@manager.com",
+                    Password = "User@12345",
+                    RoleId = _NameToId["User Manager"],
+                    CreatedDate = DateTime.Now,
+                    LastModifiedDate = DateTime.Now,
+                };
+
+                user.InsertOne(defaultUserManager);
+
+                _NameToId["defaultUserManager"] = defaultUserManager.Id!;
+
+                var defaultTableManager = new Users
+                {
+                    Name = "Default Table Manager",
+                    Number = Users.GetUNumber(),
+                    Email = "table@manager.com",
+                    Password = "table@12345",
+                    RoleId = _NameToId["Table Manager"],
+                    CreatedDate = DateTime.Now,
+                    LastModifiedDate = DateTime.Now,
+                };
+                
+                _NameToId["defaultTableManager"] = defaultTableManager.Id!;
+                
+                user.InsertOne(defaultTableManager);
             }
         }
     }

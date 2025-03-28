@@ -40,12 +40,40 @@ namespace CPMS.Controllers
                 return BadRequest(new { success = false, message = "Invalid email or password" });
             }
 
+            var result = _users.UpdateOne(u => u.Email == request.Email, Builders<Users>.Update.Set(u => u.isLogin, true).Set(u => u.LastLoginDate, DateTime.Now));
+
             return Ok(new { success = true, token = token, status = "ok"});
+        }
+
+        [HttpPost("GetAdminToken")]
+        public IActionResult GetAdminToken([FromBody] LoginRequest request)
+        {
+            if (request == null || request.Password == string.Empty || request.Password == null || request.Email == string.Empty || request.Email == null)
+            {
+                return BadRequest(new { success = false, message = "email or password is empty!" });
+            }
+
+            var token = _jwtService.AdminAuthenticate(request.Email!, request.Password!);
+
+            if (token == null)
+            {
+                return BadRequest(new { success = false, message = "Invalid email or password" });
+            }
+
+            if (token == "")
+            {
+                return Unauthorized(new { success = false, message = "Permission Denied!" });
+            }
+
+            var result = _users.UpdateOne(u => u.Email == request.Email, Builders<Users>.Update.Set(u => u.isLogin, true).Set(u => u.LastLoginDate, DateTime.Now));
+
+            return Ok(new { success = true, token = token, status = "ok" });
         }
     }
 
     public class LoginRequest
     {
+        public string? Id { get; set; }
         public string? Email { get; set; }
         public string? Password { get; set; }
     }

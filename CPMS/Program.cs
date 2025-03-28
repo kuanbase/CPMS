@@ -8,10 +8,11 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using Microsoft.OpenApi.Writers;
+using MongoDB.Driver;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// 配置 Serilog
+// 配置 Serilog, Serilog用於把系統日志推向日志系統。
 Log.Logger = new LoggerConfiguration()
     .MinimumLevel.Debug()
     .MinimumLevel.Override("Microsoft", LogEventLevel.Information)
@@ -19,7 +20,7 @@ Log.Logger = new LoggerConfiguration()
     .WriteTo.Console()
     .WriteTo.Kafka(
         bootstrapServers: "localhost:9092",
-        topic: "premission-role-logs"
+        topic: "permission-role-logs"
     )
     .CreateLogger();
 
@@ -27,11 +28,14 @@ builder.Host.UseSerilog();
 
 // Add services to the container.
 
+builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+// 新增MongoDB服務
 builder.Services.AddSingleton<MongoDBService>(serviceProvider =>
 {
     var connectionString = builder.Configuration.GetConnectionString("MongoDB");
@@ -43,6 +47,24 @@ builder.Services.AddSingleton<MongoDBService>(serviceProvider =>
     }
 
     return new MongoDBService(connectionString, "permission_role_db");
+});
+
+// 新增Kafka日志讀取用戶行為服務
+builder.Services.AddSingleton<KafkaLogReaderService>(_ =>
+{
+    var bootstrapServers = "localhost:9092";
+    var topic = "CPMS";
+    
+    return new KafkaLogReaderService(bootstrapServers, topic);
+});
+
+// 新增Kafka日志寫入用戶行為服務
+builder.Services.AddSingleton<KafkaLogWriterService>(_ =>
+{
+    var bootstrapServers = "localhost:9092";
+    var topic = "CPMS";
+    
+    return new KafkaLogWriterService(bootstrapServers, topic);
 });
 
 builder.Services.AddTransient<SeedData>();

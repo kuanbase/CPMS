@@ -21,6 +21,9 @@ public class Users
 
     public static uint UNumber = 0;
 
+    public bool isLogin { get; set; }
+    public DateTime? LastLoginDate { get; set; }
+
     public static uint GetUNumber()
     {
         UNumber += 1;

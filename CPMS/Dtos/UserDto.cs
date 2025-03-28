@@ -12,5 +12,7 @@ namespace CPMS.Dtos
         public string? Password { get; set; }
         public DateTime? CreatedDate { get; set; }
         public string? Role { get; set; }
+        public bool isLogin { get; set; }
+        public DateTime? LastLoginDate { get; set; }
     }
 }

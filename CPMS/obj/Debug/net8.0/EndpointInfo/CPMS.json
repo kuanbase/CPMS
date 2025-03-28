@@ -36,6 +36,73 @@
         }
       }
     },
+    "/api/Auth/GetAdminToken": {
+      "post": {
+        "tags": [
+          "Auth"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoginRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoginRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoginRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Logs/all": {
+      "get": {
+        "tags": [
+          "Logs"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Logs/recent/{lastOffset}": {
+      "get": {
+        "tags": [
+          "Logs"
+        ],
+        "parameters": [
+          {
+            "name": "lastOffset",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64",
+              "default": 0
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/Permission/GetPermissionList": {
       "get": {
         "tags": [
@@ -195,6 +262,111 @@
         }
       }
     },
+    "/api/Role/CreateRole": {
+      "post": {
+        "tags": [
+          "Role"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RoleRequestBody"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RoleRequestBody"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/RoleRequestBody"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Role/ModifyRoleById": {
+      "put": {
+        "tags": [
+          "Role"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RoleRequestBody"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RoleRequestBody"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/RoleRequestBody"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Role/RemoveById": {
+      "post": {
+        "tags": [
+          "Role"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RoleRequestBody"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RoleRequestBody"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/RoleRequestBody"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Role/GetRoleAmount": {
+      "get": {
+        "tags": [
+          "Role"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/User/GetUserList": {
       "get": {
         "tags": [
@@ -281,37 +453,6 @@
         }
       }
     },
-    "/api/User/GetUserByTimeArea": {
-      "get": {
-        "tags": [
-          "User"
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/TimeArea"
-              }
-            },
-            "text/json": {
-              "schema": {
-                "$ref": "#/components/schemas/TimeArea"
-              }
-            },
-            "application/*+json": {
-              "schema": {
-                "$ref": "#/components/schemas/TimeArea"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      }
-    },
     "/api/User/GetListByCurrentIndex": {
       "get": {
         "tags": [
@@ -351,17 +492,17 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/RequestBody"
+                "$ref": "#/components/schemas/UserRequestBody"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/RequestBody"
+                "$ref": "#/components/schemas/UserRequestBody"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/RequestBody"
+                "$ref": "#/components/schemas/UserRequestBody"
               }
             }
           }
@@ -413,17 +554,17 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/RequestBody"
+                "$ref": "#/components/schemas/UserRequestBody"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/RequestBody"
+                "$ref": "#/components/schemas/UserRequestBody"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/RequestBody"
+                "$ref": "#/components/schemas/UserRequestBody"
               }
             }
           }
@@ -444,21 +585,45 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/RequestBody"
+                "$ref": "#/components/schemas/UserRequestBody"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/RequestBody"
+                "$ref": "#/components/schemas/UserRequestBody"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/RequestBody"
+                "$ref": "#/components/schemas/UserRequestBody"
               }
             }
           }
         },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/User/GetOnlineUserList": {
+      "get": {
+        "tags": [
+          "User"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/User/GetUserAmount": {
+      "get": {
+        "tags": [
+          "User"
+        ],
         "responses": {
           "200": {
             "description": "OK"
@@ -511,6 +676,10 @@
       "LoginRequest": {
         "type": "object",
         "properties": {
+          "id": {
+            "type": "string",
+            "nullable": true
+          },
           "email": {
             "type": "string",
             "nullable": true
@@ -540,7 +709,21 @@
         },
         "additionalProperties": false
       },
-      "RequestBody": {
+      "RoleRequestBody": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "nullable": true
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "UserRequestBody": {
         "type": "object",
         "properties": {
           "id": {
@@ -562,20 +745,6 @@
           "role": {
             "type": "string",
             "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
-      "TimeArea": {
-        "type": "object",
-        "properties": {
-          "startTime": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "endTime": {
-            "type": "string",
-            "format": "date-time"
           }
         },
         "additionalProperties": false

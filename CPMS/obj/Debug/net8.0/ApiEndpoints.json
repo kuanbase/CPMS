@@ -1,6 +1,22 @@
 [
   {
     "ContainingType": "CPMS.Controllers.AuthController",
+    "Method": "GetAdminToken",
+    "RelativePath": "api/Auth/GetAdminToken",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "CPMS.Controllers.LoginRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "CPMS.Controllers.AuthController",
     "Method": "GetToken",
     "RelativePath": "api/Auth/GetToken",
     "HttpMethod": "POST",
@@ -11,6 +27,32 @@
         "Name": "request",
         "Type": "CPMS.Controllers.LoginRequest",
         "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "CPMS.Controllers.LogsController",
+    "Method": "GetLogsAll",
+    "RelativePath": "api/Logs/all",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "CPMS.Controllers.LogsController",
+    "Method": "GetLogs",
+    "RelativePath": "api/Logs/recent/{lastOffset}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "lastOffset",
+        "Type": "System.Int64",
+        "IsRequired": false
       }
     ],
     "ReturnTypes": []
@@ -92,8 +134,8 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "requestBody",
-        "Type": "CPMS.Controllers.RoleController\u002BRequestBody",
+        "Name": "roleRequestBody",
+        "Type": "CPMS.Controllers.RoleController\u002BRoleRequestBody",
         "IsRequired": true
       }
     ],
@@ -122,6 +164,16 @@
   },
   {
     "ContainingType": "CPMS.Controllers.RoleController",
+    "Method": "GetRoleAmount",
+    "RelativePath": "api/Role/GetRoleAmount",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "CPMS.Controllers.RoleController",
     "Method": "GetRoleList",
     "RelativePath": "api/Role/GetRoleList",
     "HttpMethod": "GET",
@@ -139,8 +191,8 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "requestBody",
-        "Type": "CPMS.Controllers.RoleController\u002BRequestBody",
+        "Name": "roleRequestBody",
+        "Type": "CPMS.Controllers.RoleController\u002BRoleRequestBody",
         "IsRequired": true
       }
     ],
@@ -155,8 +207,8 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "requestBody",
-        "Type": "CPMS.Controllers.RoleController\u002BRequestBody",
+        "Name": "roleRequestBody",
+        "Type": "CPMS.Controllers.RoleController\u002BRoleRequestBody",
         "IsRequired": true
       }
     ],
@@ -181,6 +233,26 @@
         "IsRequired": false
       }
     ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "CPMS.Controllers.UserController",
+    "Method": "GetOnlineUserList",
+    "RelativePath": "api/User/GetOnlineUserList",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "CPMS.Controllers.UserController",
+    "Method": "GetUserAmount",
+    "RelativePath": "api/User/GetUserAmount",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
     "ReturnTypes": []
   },
   {
@@ -227,22 +299,6 @@
   },
   {
     "ContainingType": "CPMS.Controllers.UserController",
-    "Method": "GetUserByTimeArea",
-    "RelativePath": "api/User/GetUserByTimeArea",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "dateArea",
-        "Type": "CPMS.Controllers.UserController\u002BTimeArea",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "CPMS.Controllers.UserController",
     "Method": "GetUserList",
     "RelativePath": "api/User/GetUserList",
     "HttpMethod": "GET",
@@ -261,7 +317,7 @@
     "Parameters": [
       {
         "Name": "body",
-        "Type": "CPMS.Controllers.UserController\u002BRequestBody",
+        "Type": "CPMS.Controllers.UserController\u002BUserRequestBody",
         "IsRequired": true
       }
     ],
@@ -278,7 +334,7 @@
       {
         "Name": "password",
         "Type": "System.String",
-        "IsRequired": true
+        "IsRequired": false
       }
     ],
     "ReturnTypes": []
@@ -292,8 +348,8 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "request",
-        "Type": "CPMS.Controllers.UserController\u002BRequestBody",
+        "Name": "userRequest",
+        "Type": "CPMS.Controllers.UserController\u002BUserRequestBody",
         "IsRequired": true
       }
     ],
@@ -308,8 +364,8 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "idRequest",
-        "Type": "CPMS.Controllers.UserController\u002BRequestBody",
+        "Name": "idUserRequest",
+        "Type": "CPMS.Controllers.UserController\u002BUserRequestBody",
         "IsRequired": true
       }
     ],
